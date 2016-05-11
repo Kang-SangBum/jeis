@@ -1,6 +1,31 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * CiBoard 주 : URL 주소에 쓰이는 URI 부분의 첫번째 요소를 정의합니다.
+ * 예를 들어 갤러리 게시판을 세팅할 경우
+ * http://www.도메인.com/board/gallery 와 같이 될 때에 board 라는 부분을 다른 이름으로 변경할 수 있습니다.
+ */
+$config['uri_segment_admin'] ='admin';  //관리자 페이지 주소
+$config['uri_segment_board'] ='board';  //게시판 목록 부분 주소
+$config['uri_segment_write'] ='write';  //게시글 쓰기 주소
+$config['uri_segment_reply'] ='reply';  //게시물 답변하기 주소
+$config['uri_segment_modify'] ='modify';  //게시글 수정하기 주소
+$config['uri_segment_rss'] ='rss';  // RSS 주소
+$config['uri_segment_group'] ='group';  //게시판 그룹 메인 주소
+$config['uri_segment_document'] ='document';  //일반 페이지 주소
+$config['uri_segment_faq'] ='faq';  //FAQ 페이지 주소
+
+//게시글 주소 ( http://www.ciboard.co.kr/post/123  과 같은 형식의 post 부분)
+$config['uri_segment_post'] ='post';
+
+//게시글 주소형식
+// A :  http://www.ciboard.co.kr/post/123 과 같이 uri_segment_post  와 post_id 가 순서대로 주소에 붙는 형식
+// B :  http://www.ciboard.co.kr/boardkey/post/123 과 같이 boardkey, uri_segment_post , post_id 가 순서대로 주소에 붙는 형식
+// C :  http://www.ciboard.co.kr/post/boardkey/123 과 같이 uri_segment_post , boardkey, post_id 가 순서대로 주소에 붙는 형식
+$config['uri_segment_post_type'] ='A';
+
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -23,7 +48,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
+
+/**
+ * CiBoard 주 : 아래의 값을 꼭 입력하여주세요.
+ * 루트에 설치하는 경우 올바른 예 ) http://www.test.com/
+ * 루트에 설치하는 경우 잘못된 예 ) http://www.test.com/index.php
+ * 서브에 설치하는 경우 올바른 예 ) http://www.test.com/subdir/
+ * 서브에 설치하는 경우 잘못된 예 ) http://www.test.com/subdir/index.php
+ */
 $config['base_url'] = '';
+if (empty($config['base_url'])) exit("&dollar;config&lsqb;&apos;base_url&apos;&rsqb;  need to be set up in application/config/config.php");  // base_url 의 값을 입력하신 후에는 여기 if 문 자체를 주석처리해도 좋습니다
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +69,12 @@ $config['base_url'] = '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+
+/**
+ * CiBoard 주 : 아래의 값은 입력하실 필요가 없습니다.
+ * index.php 라고 입력하지 말아주세요. 그냥 입력하지 않으시면 됩니다
+ */
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +91,11 @@ $config['index_page'] = 'index.php';
 |
 | WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 */
-$config['uri_protocol']	= 'REQUEST_URI';
+
+/**
+ * CiBoard 주 : 아래의 값은 변경하실 필요가 없습니다.
+ */
+$config['uri_protocol'] = 'REQUEST_URI';
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +107,10 @@ $config['uri_protocol']	= 'REQUEST_URI';
 |
 | https://codeigniter.com/user_guide/general/urls.html
 */
+
+/**
+ * CiBoard 주 : 아래의 값은 입력하실 필요가 없습니다.
+ */
 $config['url_suffix'] = '';
 
 /*
@@ -76,7 +123,11 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+
+/**
+ * CiBoard 주 : 아래의 값은 변경하실 필요가 없습니다.
+ */
+$config['language'] = 'korean';
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +140,10 @@ $config['language']	= 'english';
 | See http://php.net/htmlspecialchars for a list of supported charsets.
 |
 */
+
+/**
+ * CiBoard 주 : 아래의 값은 변경하실 필요가 없습니다.
+ */
 $config['charset'] = 'UTF-8';
 
 /*
@@ -100,7 +155,11 @@ $config['charset'] = 'UTF-8';
 | setting this variable to TRUE (boolean).  See the user guide for details.
 |
 */
-$config['enable_hooks'] = FALSE;
+
+/**
+ * CiBoard 주 : 씨아이보드는 기본적으로 후크 기능을 사용하므로, 아래의 값을 변경하시면 안됩니다.
+ */
+$config['enable_hooks'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------
@@ -114,7 +173,12 @@ $config['enable_hooks'] = FALSE;
 | https://codeigniter.com/user_guide/general/creating_libraries.html
 |
 */
-$config['subclass_prefix'] = 'MY_';
+
+/**
+ * CiBoard 주 : 씨아이보드는 기본적으로 CB_ prefix 로 클래스를 생성하여 배포합니다..
+ * 아래의 값을 변경하기 원하시는 경우, 씨아이보드에서 배포되는 클래스명의 prefix 를 모두 알맞게 변경해주세요
+ */
+$config['subclass_prefix'] = 'CB_';
 
 /*
 |--------------------------------------------------------------------------
@@ -136,6 +200,11 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
+
+/**
+ * CiBoard 주 : 씨아이보드는 composer 기능을 현재는 사용하고 있지 않습니다.
+ * 즉 아래의 값을 변경하실 필요가 없습니다
+ */
 $config['composer_autoload'] = FALSE;
 
 /*
@@ -213,6 +282,11 @@ $config['directory_trigger'] = 'd';
 | your log files will fill up very fast.
 |
 */
+
+/**
+ * CiBoard 주 : 로그를 어느 정도 수준에서 남길지 결정합니다..
+ * 0 부터 4 사이에 원하시는 값으로 변경하시면 됩니다
+ */
 $config['log_threshold'] = 0;
 
 /*
@@ -224,6 +298,12 @@ $config['log_threshold'] = 0;
 | application/logs/ directory. Use a full server path with trailing slash.
 |
 */
+
+/**
+ * CiBoard 주 : 로그 경로는 기본적으로 application/logs 로 설정되어있습니다.
+ * log 가 쌓이는 디렉토리 경로를 변경하기 원하시는 경우에만 입력해주세요
+ * 입력하지 않으시면 application/logs 에 쌓이는 것을 확인하실 수 있습니다
+ */
 $config['log_path'] = '';
 
 /*
@@ -238,6 +318,11 @@ $config['log_path'] = '';
 | Note: Leaving it blank will default to 'php'.
 |
 */
+
+/**
+ * CiBoard 주 : 로그 파일 확장자는 기본적으로 php 입니다.
+ * 다른 확장자로 변경하기 원하시는 경우에만 입력해주세요
+ */
 $config['log_file_extension'] = '';
 
 /*
@@ -250,6 +335,10 @@ $config['log_file_extension'] = '';
 | IMPORTANT: This MUST be an integer (no quotes) and you MUST use octal
 |            integer notation (i.e. 0700, 0644, etc.)
 */
+
+/**
+ * CiBoard 주 : 아래의 값을 특별히 변경하실 필요가 없습니다
+ */
 $config['log_file_permissions'] = 0644;
 
 /*
@@ -261,6 +350,10 @@ $config['log_file_permissions'] = 0644;
 | codes to set your own date formatting
 |
 */
+
+/**
+ * CiBoard 주 : 로그파일명 포맷입니다. 원하시는 경우 필요한 포맷으로 변경하셔도 좋습니다
+ */
 $config['log_date_format'] = 'Y-m-d H:i:s';
 
 /*
@@ -283,6 +376,12 @@ $config['error_views_path'] = '';
 | application/cache/ directory.  Use a full server path with trailing slash.
 |
 */
+
+/**
+ * CiBoard 주 : 캐시 경로는 기본적으로 application/cache 로 설정되어있습니다.
+ * 캐시가 쌓이는 디렉토리 경로를 변경하기 원하시는 경우에만 입력해주세요
+ * 입력하지 않으시면 application/cache 에 쌓이는 것을 확인하실 수 있습니다
+ */
 $config['cache_path'] = '';
 
 /*
@@ -301,6 +400,10 @@ $config['cache_path'] = '';
 |	             of query parameters.
 |
 */
+
+/**
+ * CiBoard 주 : 아래의 값을 변경하실 필요가 없습니다
+ */
 $config['cache_query_string'] = FALSE;
 
 /*
@@ -314,6 +417,11 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
+
+/**
+ * CiBoard 주 : 아래의 값을 입력해주세요
+ * 입력하신 값은 외부에 공개되지 않도록 주의해주세요
+ */
 $config['encryption_key'] = '';
 
 /*
@@ -367,10 +475,15 @@ $config['encryption_key'] = '';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
+
+/**
+ * CiBoard 주 : 원하시는 경우 세션 환경값을 변경하여 주세요
+ */
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = NULL;
+//$config['sess_save_path'] =  APPPATH.'cache/session/';
+$config['sess_save_path'] =  NULL;
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
@@ -390,11 +503,16 @@ $config['sess_regenerate_destroy'] = FALSE;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= '';
-$config['cookie_domain']	= '';
-$config['cookie_path']		= '/';
-$config['cookie_secure']	= FALSE;
-$config['cookie_httponly'] 	= FALSE;
+
+/**
+ * CiBoard 주 : 쿠키 정보를 알맞게 입력해주세요
+ * 특별한 경우가 아니면, 기본적으로 cookie_domain 값만 변경하시면 됩니다.
+ */
+$config['cookie_prefix'] = '';
+$config['cookie_domain'] = ''; // .ciboard.co.kr 와 같이 맨 앞에 . 을 찍고 도메인 명을 적습니다
+$config['cookie_path'] = '/';
+$config['cookie_secure'] = FALSE;
+$config['cookie_httponly'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -408,6 +526,10 @@ $config['cookie_httponly'] 	= FALSE;
 | (usually \n) and Windows (\r\n).
 |
 */
+
+/**
+ * CiBoard 주 : 아래의 값을 변경하지 말아주세요.
+ */
 $config['standardize_newlines'] = FALSE;
 
 /*
@@ -422,6 +544,10 @@ $config['standardize_newlines'] = FALSE;
 |          for backwards compatibility purposes!
 |
 */
+
+/**
+ * CiBoard 주 : 아래의 값을 변경하지 말아주세요.
+ */
 $config['global_xss_filtering'] = FALSE;
 
 /*
@@ -438,12 +564,20 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
-$config['csrf_protection'] = FALSE;
-$config['csrf_token_name'] = 'csrf_test_name';
-$config['csrf_cookie_name'] = 'csrf_cookie_name';
+
+/**
+ * CiBoard 주 : csrf protection 을 사용하지 않고 싶은 경우 FALSE 로 변경하시면 됩니다.
+ * 그러나 보안상의 위험이 따르므로 TRUE 로 설정해 놓으시길 강력히!! 추천합니다
+ */
+$config['csrf_protection'] = TRUE;
+$config['csrf_token_name'] = 'csrf_test_name'; // 값을 변경하지 말아주세요
+$config['csrf_cookie_name'] = 'csrf_cookie_name'; // 값을 변경하지 말아주세요
 $config['csrf_expire'] = 7200;
-$config['csrf_regenerate'] = TRUE;
-$config['csrf_exclude_uris'] = array();
+$config['csrf_regenerate'] = FALSE;
+$config['csrf_exclude_uris'] = array(
+		array('controller' => 'editorfileupload', 'method' => 'smarteditor'),
+		array('controller' => 'editorfileupload', 'method' => 'ckeditor'),
+);
 
 /*
 |--------------------------------------------------------------------------
@@ -480,6 +614,7 @@ $config['compress_output'] = FALSE;
 */
 $config['time_reference'] = 'local';
 
+
 /*
 |--------------------------------------------------------------------------
 | Rewrite PHP Short Tags
@@ -511,3 +646,12 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+
+
+/**
+ * CiBoard 주 : 아래의 값을 변경하지 말아주세요.
+ * 버전 체크용으로 사용됩니다
+ */
+$config['ciboard_website'] = 'http://www.ciboard.co.kr/';
+$config['ciboard_check_latest_version'] = 'http://api.ciboard.co.kr/version/check/';

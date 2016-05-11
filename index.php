@@ -35,7 +35,7 @@
  * @since	Version 1.0.0
  * @filesource
  */
-  
+
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -53,7 +53,13 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+
+/**
+ * CiBoard 주 : 설치시에는 값을 production 으로 유지해주세요.
+ * 그래야 install 페이지로 정상적으로 이동됩니다.
+ * 설치 이후에는 이 값을 변경하셔도 상관없습니다.
+*/
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
 
 /*
  *---------------------------------------------------------------
@@ -97,11 +103,17 @@ switch (ENVIRONMENT)
  * This variable must contain the name of your "system" directory.
  * Set the path if it is not in the same directory as this file.
  */
-	$system_path = 'system';
+
+/**
+ *	CiBoard 주 : 디렉토리명을 system 에서 _system 으로 변경하였습니다.
+ *	원하시면 다른 값으로 변경하셔도 좋습니다.
+ * 변경하시는 경우, 실제 서버에 존재하는 _system 디렉토리명도 같이 변경해주세요
+*/
+	$system_path = '_system';
 
 /*
  *---------------------------------------------------------------
- * APPLICATION DIRECTORY NAME
+ * APPLICATION FOLDER NAME
  *---------------------------------------------------------------
  *
  * If you want this front controller to use a different "application"
@@ -114,7 +126,13 @@ switch (ENVIRONMENT)
  *
  * NO TRAILING SLASH!
  */
-	$application_folder = 'application';
+
+/**
+ *	CiBoard 주 : application 디렉토리명입니다.
+ *	원하시면 다른 값으로 변경하셔도 좋습니다.
+ * 변경하시는 경우, 실제 서버에 존재하는 application 디렉토리명도 같이 변경해주세요
+*/
+$application_folder = 'application';
 
 /*
  *---------------------------------------------------------------
@@ -129,7 +147,15 @@ switch (ENVIRONMENT)
  *
  * NO TRAILING SLASH!
  */
-	$view_folder = '';
+
+/**
+ *	CiBoard 주 : view 디렉토리명입니다.
+ *	씨아이보드의 경우 view 디렉토리가 application 안에 있는 것이 아니라
+ *	root 디렉토리에 존재합니다.
+ *	원하시면 다른 값으로 변경하셔도 좋습니다
+ * 변경하시는 경우, 실제 서버에 존재하는 views 디렉토리명도 같이 변경해주세요
+*/
+$view_folder = 'views';
 
 
 /*
@@ -235,6 +261,8 @@ switch (ENVIRONMENT)
 	// Name of the "system" directory
 	define('SYSDIR', basename(BASEPATH));
 
+	$_application_folder = $application_folder;
+
 	// The path to the "application" directory
 	if (is_dir($application_folder))
 	{
@@ -268,10 +296,13 @@ switch (ENVIRONMENT)
 
 	define('APPPATH', $application_folder.DIRECTORY_SEPARATOR);
 
+	$view_dir = $view_folder;
+
 	// The path to the "views" directory
 	if ( ! isset($view_folder[0]) && is_dir(APPPATH.'views'.DIRECTORY_SEPARATOR))
 	{
-		$view_folder = APPPATH.'views';
+        $view_folder = APPPATH.'views';
+        $view_dir = $_application_folder.'/'.$view_dir;
 	}
 	elseif (is_dir($view_folder))
 	{
@@ -295,6 +326,7 @@ switch (ENVIRONMENT)
 			'/\\',
 			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
 		);
+		$view_dir = $_application_folder.'/'.$view_dir;
 	}
 	else
 	{
@@ -303,8 +335,9 @@ switch (ENVIRONMENT)
 		exit(3); // EXIT_CONFIG
 	}
 
-	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
 
+	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
+	define('VIEW_DIR', $view_dir . '/');
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE

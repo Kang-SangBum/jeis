@@ -42,7 +42,7 @@ defined('DIR_WRITE_MODE')  OR define('DIR_WRITE_MODE', 0755);
 defined('FOPEN_READ')                           OR define('FOPEN_READ', 'rb');
 defined('FOPEN_READ_WRITE')                     OR define('FOPEN_READ_WRITE', 'r+b');
 defined('FOPEN_WRITE_CREATE_DESTRUCTIVE')       OR define('FOPEN_WRITE_CREATE_DESTRUCTIVE', 'wb'); // truncates existing file data, use with care
-defined('FOPEN_READ_WRITE_CREATE_DESTRUCTIVE')  OR define('FOPEN_READ_WRITE_CREATE_DESTRUCTIVE', 'w+b'); // truncates existing file data, use with care
+defined('FOPEN_READ_WRITE_CREATE_DESTRUCTIVE') OR define('FOPEN_READ_WRITE_CREATE_DESTRUCTIVE', 'w+b'); // truncates existing file data, use with care
 defined('FOPEN_WRITE_CREATE')                   OR define('FOPEN_WRITE_CREATE', 'ab');
 defined('FOPEN_READ_WRITE_CREATE')              OR define('FOPEN_READ_WRITE_CREATE', 'a+b');
 defined('FOPEN_WRITE_CREATE_STRICT')            OR define('FOPEN_WRITE_CREATE_STRICT', 'xb');
@@ -83,3 +83,32 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+defined('PASSWORD_BCRYPT') OR define('PASSWORD_BCRYPT', 1);
+
+/*
+ *	CiBoard 주 : 이하는 씨아이보드 정의 상수입니다
+*/
+
+/*
+ *	CiBoard 주 : 관리자 페이지 스킨 경로입니다.
+ *	CIBoard 배포판은 basic 스킨을 사용합니다.
+ *	어드민 스킨을 제작하여 다른 폴더명으로 배포하실 수 있습니다.
+*/
+
+defined('ADMIN_SKIN') OR define('ADMIN_SKIN', 'basic');
+
+
+/*
+ *	CiBoard 주 : 현재 지역 timezone 설정입니다.
+ *	대한민국이 아닌 해외에서 사용하시는 경우, 아래의 값을 변경하셔서 사용하시면 됩니다
+*/
+if (PHP_VERSION >= '5.1.0') {
+	date_default_timezone_set('Asia/Seoul');
+}
+
+
+/*
+ *	CiBoard 주 : 현재 시간 정의 상수입니다. 값을 변경하지 말아주세요
+*/
+defined('TIMESTAMP') or define('TIMESTAMP', time());

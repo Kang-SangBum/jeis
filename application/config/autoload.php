@@ -58,7 +58,13 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array();
+
+/**
+ *	CiBoard 주 : 씨아이보드 사용을 위해 아래 라이브러리를 autoload 하고 있습니다.
+ *	기본적으로 autoload 되고 있는 라이브러리는 지우시면 안됩니다
+ *	그러나 필요한 경우 새로운 라이브러리를 추가히시는 건 괜찮습니다
+ */
+$autoload['libraries'] = array('session', 'managelayout', 'member', 'cbconfig', 'board', 'user_agent', 'events');
 
 /*
 | -------------------------------------------------------------------
@@ -89,7 +95,13 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array();
+
+/**
+ *	CiBoard 주 : 씨아이보드 사용을 위해 아래 헬퍼를 autoload 하고 있습니다.
+ *	기본적으로 autoload 되고 있는 헬퍼는 지우시면 안됩니다
+ *	그러나 필요한 경우 새로운 헬퍼를 추가히시는 건 괜찮습니다
+ */
+$autoload['helper'] = array('url', 'basic', 'thumbnail', 'cookie');
 
 /*
 | -------------------------------------------------------------------
@@ -103,7 +115,13 @@ $autoload['helper'] = array();
 | config files.  Otherwise, leave it blank.
 |
 */
-$autoload['config'] = array();
+
+/**
+ *	CiBoard 주 : 씨아이보드 사용을 위해 아래 config 파일을 autoload 하고 있습니다.
+ *	기본적으로 autoload 되고 있는 config 파일은 지우시면 안됩니다
+ *	그러나 필요한 경우 새로운 config 파일을 추가히시는 건 괜찮습니다
+ */
+$autoload['config'] = array('cb_config', 'cb_version');
 
 /*
 | -------------------------------------------------------------------
